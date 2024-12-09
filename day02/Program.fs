@@ -7,6 +7,7 @@ let readFile (path: string) =
     File.ReadAllLines(filePath)
 
 let toIntList (line: String) = line.Split(" ") |> Array.toList |> List.map int
+let parse filename = readFile filename |> Array.toList |> List.map toIntList
 
 let bounds (x, y) = List.contains (abs (x - y)) [1..3]
 let increasing (x,y) = (x < y)
@@ -23,8 +24,6 @@ let isSafeDamp parts =
     List.indexed parts
     |> List.map (fun (idx, _) -> List.removeAt idx parts)
     |> List.exists isSafe
-
-let parse filename = readFile filename |> Array.toList |> List.map toIntList
 
 let example = parse "example.txt"
 let input = parse "input.txt"
